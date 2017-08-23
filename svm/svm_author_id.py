@@ -19,12 +19,16 @@ from email_preprocess import preprocess
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
 
+from sklearn.metrics import accuracy_score
+from sklearn import svm
+
+svm_classifier = svm.SVC(kernel='rbf', C=10000)
+svm_classifier.fit(features_train, labels_train)
+pred = svm_classifier.predict(features_test)
+print accuracy_score(pred, labels_test)
 
 
-
-#########################################################
-### your code goes here ###
-
-#########################################################
-
-
+print 'Prediction for 10 ' + str(pred[10])
+print 'Prediction for 26 ' + str(pred[26])
+print 'Prediction for 50 ' + str(pred[50])
+print 'Chris number of predictions ' + str(len(filter(lambda x: x == 1,pred)))
